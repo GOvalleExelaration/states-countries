@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import Dropdown from './Dropdown';
+import CountriesAndStates from './CountriesAndStates';
 
 interface Country {
   id: number;
@@ -103,10 +105,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Countries</h2>
-        <select id="dropdownCountry" onChange={onChange}>{countries.map(c => <option value={c.code}>{c.name}</option>)}</select>
-        <h2>States</h2>
-        <select id="dropdownStates">{states.map(s => <option value={s.code}>{s.name}</option>)}</select>
+        <CountriesAndStates countriesValues={countries} statesValues={states} countriesTextColumn="name" countriesValuesColumn="code" statesTextColumn="name" statesValuesColumn="code" onChange={onChange}/>
         <form onSubmit={addNewCountry}>
           <h2>New Country</h2>
           <label>Input the new country's name: </label>
@@ -126,9 +125,9 @@ function App() {
           <input type="text" name="stateCode"></input>
           <br></br>
           <label>Select the parent country: </label>
-          <select name="parentCountryId">{countries.map(c => <option value={c.id}>{c.name}</option>)}</select>
+          <Dropdown id="parentCountryId" values={countries} textField="name" valueField="id"/>
           <br></br>
-          <button type="submit"></button>
+          <button type="submit">Add New State</button>
         </form>
         
       </header>
